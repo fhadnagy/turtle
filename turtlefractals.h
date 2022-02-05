@@ -5,13 +5,15 @@
 #include <iostream>
 class Turtle
 {
-public:
+private:
     std::string r = "tr",
                 l = "tl", f = "fw",
                 b = "bw", pu = "pu",
                 pd = "pd";
     bool write = false;
     std::ofstream file;
+
+public:
     Turtle(){};
     Turtle(std::string _r, std::string _l, std::string _f, std::string _b, std::string _pu, std::string _pd)
     {
@@ -35,7 +37,7 @@ public:
      * @param fname
      * name of the file with txt extension
      */
-    void clf(const std::string &fname);
+    void clf();
 
     /// turn x degrees right
     void rt(const int &x);
@@ -51,6 +53,54 @@ public:
     void up();
     /// pen down
     void down();
+};
+
+class Pattern
+{
+protected:
+    std::string startstr = "x";
+    std::ofstream otmp;
+    std::ifstream itmp;
+    Turtle t;
+    std::string str1 = "tmpfile1.txt", str2 = "tmpfile2.txt";
+
+public:
+    Pattern(std::string _r, std::string _l,
+            std::string _f, std::string _b,
+            std::string _pu, std::string _pd)
+        : t(_r, _l, _f, _b, _pu, _pd)
+    {
+    }
+    void opf(const std::string &fname)
+    {
+        t.opf(fname);
+    }
+    void clf()
+    {
+        t.clf();
+    }
+    virtual void iterate(const std::string &fname, const int &n) = 0;
+    virtual void change() = 0;
+};
+
+class Turns : public Pattern
+{
+private:
+    int angle = 78;
+    int dt = 10;
+    bool norm=true;
+public:
+    Turns(std::string _r, std::string _l,
+          std::string _f, std::string _b,
+          std::string _pu, std::string _pd,
+          const int &_angle, const int &_dt)
+        : Pattern(_r, _l, _f, _b, _pu, _pd)
+    {
+        angle = _angle;
+        dt = _dt;
+    }
+    void iterate(const std::string &fname, const int &n);
+    void change();
 };
 
 #endif // !TURLTLEFRACTALS_H

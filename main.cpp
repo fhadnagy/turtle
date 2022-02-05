@@ -28,6 +28,7 @@ int main(int argc, char const *argv[])
     Turtle t;
     t.opf("tekn.txt");
     t.fw(8);
-    
+    Turns trn("tr","tl","fw","bw","pu","pd",78,10);
+    trn.iterate("trns.txt",2);
     return 0;
 }

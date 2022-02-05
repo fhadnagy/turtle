@@ -6,7 +6,7 @@ void Turtle::opf(const std::string &fname)
     write = true;
 }
 
-void Turtle::clf(const std::string &fname)
+void Turtle::clf()
 {
     file.close();
     write = false;
@@ -82,4 +82,75 @@ void Turtle::down()
     {
         std::cout << "cant wrtie, no file" << std::endl;
     }
+}
+
+void Turns::iterate(const std::string &fname, const int &n)
+{
+    char c=' ';
+    for (int i = 0; i < n; i++)
+    {
+        change();
+    }
+    t.opf(fname);
+    if (norm)
+    {
+        itmp.open(str1);
+    }
+    else
+    {
+        itmp.open(str2);
+    }
+
+    while (!itmp.eof())
+    {
+        itmp>>c;
+        switch (c)
+        {
+        case 'x':
+            t.fw(dt);
+            t.rt(angle);
+            break;
+        
+        default:
+            break;
+        }
+    }
+    
+    itmp.close();
+    t.clf();
+}
+
+void Turns::change()
+{
+    char c=' ';
+    if (norm)
+    {
+        itmp.open(str1);
+        otmp.open(str2);
+    }
+    else
+    {
+        itmp.open(str2);
+        otmp.open(str1);
+    }
+
+    while (!itmp.eof())
+    {
+        itmp>>c;
+        switch (c)
+        {
+        case 'x':
+            otmp<<"x";
+            break;
+        
+        default:
+            break;
+        }
+        
+    }
+    otmp<<"x";
+    
+    norm = norm ? 0 : 1;
+    itmp.close();
+    otmp.close();
 }
