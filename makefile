@@ -8,4 +8,4 @@ turlefractals.o: turtlefractals.cpp turtlefractals.h
 	g++ -std=c++11 -c turtlefractals.cpp
 
 cl:
-	rm *.o out
+	rm *.o *.txt out

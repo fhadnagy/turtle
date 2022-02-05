@@ -25,10 +25,7 @@ void Apple::getps()
 int main(int argc, char const *argv[])
 {
     std::cout << "start" << std::endl;
-    Turtle t;
-    t.opf("tekn.txt");
-    t.fw(8);
-    Turns trn("tr","tl","fw","bw","pu","pd",78,10);
-    trn.iterate("trns.txt",2);
+    Turns trn("tr","tl","fw","bw","pu","pd",78,50);
+    trn.iterate("trns.txt",40);
     return 0;
 }

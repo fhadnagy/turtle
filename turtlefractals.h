@@ -58,7 +58,8 @@ public:
 class Pattern
 {
 protected:
-    std::string startstr = "x";
+    std::string startstr = "x#";
+    const char escape='#';
     std::ofstream otmp;
     std::ifstream itmp;
     Turtle t;

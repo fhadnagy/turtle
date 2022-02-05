@@ -86,7 +86,18 @@ void Turtle::down()
 
 void Turns::iterate(const std::string &fname, const int &n)
 {
-    char c=' ';
+    //std::cout << "iterate" << std::endl;
+    char c = ' ';
+    if (norm)
+    {
+        otmp.open(str1);
+    }
+    else
+    {
+        otmp.open(str2);
+    }
+    otmp << startstr;
+    otmp.close();
     for (int i = 0; i < n; i++)
     {
         change();
@@ -101,28 +112,31 @@ void Turns::iterate(const std::string &fname, const int &n)
         itmp.open(str2);
     }
 
-    while (!itmp.eof())
+    while (c != escape)
     {
-        itmp>>c;
+        //std::cout << "itmp" << std::endl;
+        itmp >> c;
         switch (c)
         {
         case 'x':
             t.fw(dt);
             t.rt(angle);
             break;
-        
+
         default:
+
             break;
         }
     }
-    
+
     itmp.close();
     t.clf();
 }
 
 void Turns::change()
 {
-    char c=' ';
+    //std::cout << "change" << std::endl;
+    char c = ' ';
     if (norm)
     {
         itmp.open(str1);
@@ -133,23 +147,23 @@ void Turns::change()
         itmp.open(str2);
         otmp.open(str1);
     }
-
-    while (!itmp.eof())
+    otmp << "x";
+    while (c != escape)
     {
-        itmp>>c;
+        //std::cout << "itmp" << std::endl;
+        itmp >> c;
         switch (c)
         {
         case 'x':
-            otmp<<"x";
+            otmp << "x";
             break;
-        
+
         default:
+            otmp << c;
             break;
         }
-        
     }
-    otmp<<"x";
-    
+
     norm = norm ? 0 : 1;
     itmp.close();
     otmp.close();
